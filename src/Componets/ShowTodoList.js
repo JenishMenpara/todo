@@ -23,6 +23,7 @@ const ShowTodoList = props => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const handleDeleteTodo = id => {
     dispatch(deleteTodo(id));
+    setDialogVisible(false);
   };
 
   const handleEditTodo = item => {
@@ -36,7 +37,6 @@ const ShowTodoList = props => {
   const updateTodoText = id => {
     setIsEdit(false);
     dispatch(updateTodo(id, newTodoText));
-    setDialogVisible(false);
   };
 
   return (
@@ -71,12 +71,14 @@ const ShowTodoList = props => {
           <>
             {toggleCheckBox ? null : (
               <TouchableOpacity onPress={() => handleEditTodo(item)}>
-                <Icon name="edit" size={25} color="#babac0" />
+                <Icon name="edit" size={25} color="#000000" />
               </TouchableOpacity>
             )}
 
-            <TouchableOpacity onPress={() => setDialogVisible(true)}>
-              <Icon name="delete" size={25} color="#babac0" />
+            <TouchableOpacity
+              onPress={() => setDialogVisible(true)}
+              style={{marginLeft: 5}}>
+              <Icon name="delete" size={25} color="#000000" />
             </TouchableOpacity>
           </>
         )}
@@ -87,7 +89,7 @@ const ShowTodoList = props => {
         visible={dialogVisible}
         onTouchOutside={() => setDialogVisible(false)}
         positiveButton={{
-          title: 'ok',
+          title: 'Yes',
           onPress: () => handleDeleteTodo(item?.id),
         }}
         negativeButton={{
